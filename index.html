@@ -7,25 +7,44 @@
     <title>ThreeJs</title>
   </head>
   <body>
+    <!-- <canvas id="c"></canvas> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
     <script>
       var scene = new THREE.Scene();
+
       var camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
         0.1,
         1000
       );
+      camera.position.z = 5;
+
       var renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setClearColor("#e5e5e5");
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
       document.body.appendChild(renderer.domElement);
-      window.addEventListener("render", () => {
+
+      window.addEventListener("resize", () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
+
         camera.updateProjectionMatrix();
       });
+
+      //code
+
+      var geometry = new THREE.SphereGeometry(1, 10, 10);
+      var material = new THREE.MeshLambertMaterial({ color: 0xffcc00 });
+      var mesh = new THREE.Mesh(geometry, material);
+
+      scene.add(mesh);
+
+      //end code
+
       renderer.render(scene, camera);
     </script>
   </body>
