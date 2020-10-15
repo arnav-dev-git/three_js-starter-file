@@ -32,12 +32,18 @@ var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
 var geometry = new THREE.SphereGeometry(1, 100, 100);
-var material = new THREE.MeshNormalMaterial({
-  color: 0xffcc00,
+// var material = new THREE.MeshNormalMaterial({
+//   color: 0xffcc00,
+//   transparent: true,
+//   opacity: 0.7,
+// });
+var material = new THREE.MeshLambertMaterial({
+  // map: texture,
+  envMap: scene.background,
+  combine: THREE.MixOperation,
+  reflectivity: 0.3,
   transparent: true,
-  opacity: 0.7,
-  distortion: true,
-  distortionScale: 5.9,
+  opacity: 0.2,
 });
 var mesh = new THREE.Mesh(geometry, material);
 // mesh.rotation.y = 2;
